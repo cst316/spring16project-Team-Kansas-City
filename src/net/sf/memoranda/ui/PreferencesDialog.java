@@ -20,16 +20,23 @@ public class PreferencesDialog extends JDialog {
 	JTabbedPane tabbedPanel = new JTabbedPane();
 
 	JPanel GeneralPanel = new JPanel(new GridBagLayout());
-
+	JPanel restraintPanel = new JPanel();
+	JPanel jPanel15 = new JPanel();
+	GridLayout gridLayout15 = new GridLayout();
 	GridBagConstraints gbc;
 
 	JLabel jLabel1 = new JLabel();
 
 	ButtonGroup minGroup = new ButtonGroup();
+	ButtonGroup taskGroup = new ButtonGroup();
 
 	JRadioButton minTaskbarRB = new JRadioButton();
 
 	JRadioButton minHideRB = new JRadioButton();
+	
+	JRadioButton greyPastRB = new JRadioButton();
+	JRadioButton greyStartRB = new JRadioButton();
+	
 
 	ButtonGroup closeGroup = new ButtonGroup();
 
@@ -98,6 +105,7 @@ public class PreferencesDialog extends JDialog {
 	BorderLayout borderLayout1 = new BorderLayout();
 
 	TitledBorder titledBorder1;
+	TitledBorder titledBorder15;
 
 	ButtonGroup soundGroup = new ButtonGroup();
 
@@ -156,14 +164,7 @@ public class PreferencesDialog extends JDialog {
 				Color.white, new Color(156, 156, 158)), Local
 				.getString("Sound"));
 		this.setResizable(false);
-		// Build Tab1
-		jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
-		jLabel1.setText(Local.getString("Window minimize action:"));
-		gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.insets = new Insets(10, 10, 0, 15);
-		gbc.anchor = GridBagConstraints.EAST;
+	
 		enableSoundCB.setText(Local.getString("Enable sound notifications"));
 		enableSoundCB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -213,6 +214,17 @@ public class PreferencesDialog extends JDialog {
 		jPanel3.add(soundFile, BorderLayout.CENTER);
 		jPanel3.add(soundFileBrowseB, BorderLayout.EAST);
 		jPanel3.add(jLabel6, BorderLayout.WEST);
+		
+		
+		// Build Tab1
+		jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
+		jLabel1.setText(Local.getString("Window minimize action:"));
+		gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.insets = new Insets(10, 10, 0, 15);
+		gbc.anchor = GridBagConstraints.EAST;
+		
 		GeneralPanel.add(jLabel1, gbc);
 		minGroup.add(minTaskbarRB);
 		minTaskbarRB.setSelected(true);
@@ -481,11 +493,44 @@ public class PreferencesDialog extends JDialog {
 		((GridLayout)econfPanel.getLayout()).setHgap(10);
 		((GridLayout)econfPanel.getLayout()).setVgap(5);
 		editorConfigPanel.add(econfPanel, BorderLayout.NORTH);
+		
+		
+		// Restraint Tab
+		titledBorder15 = new TitledBorder(BorderFactory.createEtchedBorder(
+				Color.white, new Color(156, 156, 158)), Local
+				.getString("Task Calendar Rules"));
+		this.setResizable(false);
+		
+		gridLayout15.setRows(2);
+		jPanel15.setBorder(titledBorder15);
+		jPanel15.setLayout(gridLayout15);
+		
+		greyStartRB.setText(Local.getString("Don't allow task creation before project start date"));
+		greyStartRB.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				greyStartRB_actionPerformed(e);
+			}
+		});
+		
+		greyPastRB.setText(Local.getString("Don't allow task creation before current date"));
+		greyPastRB.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				greyPastRB_actionPerformed(e);
+			}
+		});
+		
+		taskGroup.add(greyStartRB);
+		taskGroup.add(greyPastRB);
+		jPanel15.add(greyStartRB,null);
+		jPanel15.add(greyPastRB,null);
+		restraintPanel.add(jPanel15);
+		
 		// Build TabbedPanel
 		tabbedPanel.add(GeneralPanel, Local.getString("General"));
 		tabbedPanel.add(resourcePanel, Local.getString("Resource types"));
 		tabbedPanel.add(soundPanel, Local.getString("Sound"));
 		tabbedPanel.add(editorConfigPanel, Local.getString("Editor"));
+		tabbedPanel.add(restraintPanel, Local.getString("Restraints"));
 
 		// Build TopPanel
 		topPanel.add(tabbedPanel, BorderLayout.CENTER);
@@ -607,6 +652,15 @@ public class PreferencesDialog extends JDialog {
 			baseFontSize.setValue(Integer.decode(Configuration.get("BASE_FONT_SIZE").toString()));
 		else
 			baseFontSize.setValue(new Integer(16));
+		
+		//added pull from properties to get preference options for calendar
+		String greyopt = Configuration.get("CALENDAR_GREY").toString();
+		if (greyopt.equalsIgnoreCase("start_date"))
+			greyStartRB.setSelected(true);
+		else if (greyopt.equalsIgnoreCase("current_date"))
+			greyPastRB.setSelected(true);
+		else
+			greyStartRB.setSelected(true);
 	}
 
 	void apply() {
@@ -646,6 +700,11 @@ public class PreferencesDialog extends JDialog {
 			Configuration.put("ON_CLOSE", "minimize");
 
 		Configuration.put("ON_MINIMIZE", "normal");
+		
+		if (this.greyStartRB.isSelected())
+			Configuration.put("CALENDAR_GREY", "start_date");
+		else
+			Configuration.put("CALENDAR_GREY", "current_date");
 
 		String lf = Configuration.get("LOOK_AND_FEEL").toString();
 		String newlf = "";
@@ -787,6 +846,14 @@ public class PreferencesDialog extends JDialog {
 
 	void enL10nChB_actionPerformed(ActionEvent e) {
 
+	}
+	
+	void greyPastRB_actionPerformed(ActionEvent e){
+		
+	}
+	
+	void greyStartRB_actionPerformed(ActionEvent e){
+		
 	}
 
 	void browseB_actionPerformed(ActionEvent e) {

@@ -343,6 +343,8 @@ public class TaskPanel extends JPanel {
             public void projectChange(Project p, NoteList nl, TaskList tl, ResourcesList rl) {
                 newTaskB.setEnabled(
                     CurrentDate.get().inPeriod(p.getStartDate(), p.getEndDate()));
+                	System.out.println("[DEBUG] Start Date at line 346: " + p.getStartDate().toString());
+                	// debug line added to locate task date rules.
             }
             public void projectWasChanged() {
             	//taskTable.setCurrentRootTask(null); //XXX

@@ -38,6 +38,8 @@ import javax.swing.JCheckBox;
 
 import net.sf.memoranda.CurrentProject;
 import net.sf.memoranda.date.CalendarDate;
+import net.sf.memoranda.date.CurrentDate;
+import net.sf.memoranda.util.Configuration;
 import net.sf.memoranda.util.Local;
 
 /*$Id: TaskDialog.java,v 1.25 2005/12/01 08:12:26 alexeya Exp $*/
@@ -101,8 +103,7 @@ public class TaskDialog extends JDialog {
 	JLabel jLabelProgress = new JLabel();
 	JSpinner progress = new JSpinner(new SpinnerNumberModel(0, 0, 100, 5));
 	
-	//Forbid to set dates outside the bounds
-	CalendarDate startDateMin = CurrentProject.get().getStartDate();
+	CalendarDate startDateMin;
 	CalendarDate startDateMax = CurrentProject.get().getEndDate();
 	CalendarDate endDateMin = startDateMin;
 	CalendarDate endDateMax = startDateMax;
@@ -221,6 +222,14 @@ public class TaskDialog extends JDialog {
 
         startDate.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
+            	
+            	if(Configuration.get("CALENDAR_GREY").toString().equalsIgnoreCase("start_date")){
+            			startDateMin = CurrentProject.get().getStartDate();
+            	}
+            	else{
+            			startDateMin = CurrentDate.get();
+            	}
+            	
             	// it's an ugly hack so that the spinner can increase day by day
             	SpinnerDateModel sdm = new SpinnerDateModel((Date)startDate.getModel().getValue(),null,null,Calendar.DAY_OF_WEEK);
             	startDate.setModel(sdm);
