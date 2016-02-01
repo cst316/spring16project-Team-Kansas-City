@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 public class NotesListPanel extends JPanel {
   BorderLayout borderLayout1 = new BorderLayout();
   JScrollPane scrollPane = new JScrollPane();
-  public NotesList notesList = new NotesList();
+  public static NotesList notesList = new NotesList();
 
   public NotesListPanel() {
     try {

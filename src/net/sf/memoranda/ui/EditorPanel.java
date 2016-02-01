@@ -50,6 +50,8 @@ public class EditorPanel extends JPanel {
 	JButton importB = new JButton();
 
 	JButton exportB = new JButton();
+	
+	JButton quickSaveB = new JButton();
 
 	JButton redoB = new JButton();
 
@@ -135,6 +137,15 @@ public class EditorPanel extends JPanel {
 			exportB_actionPerformed(e);
 		}
 	};
+	
+	   public Action quickSaveAction = new AbstractAction(Local
+	            .getString("Quicksave note."), new ImageIcon(
+	            net.sf.memoranda.ui.AppFrame.class
+	                    .getResource("resources/icons/todo_new.png"))) {
+	        public void actionPerformed(ActionEvent e) {
+	            quickSaveB_actionPerformed(e);
+	        }
+	    };
 
 	public Action importAction = new AbstractAction(Local
 			.getString("Insert file"), new ImageIcon(
@@ -193,6 +204,16 @@ public class EditorPanel extends JPanel {
 		exportB.setBorderPainted(false);
 		exportB.setFocusable(false);
 		exportB.setText("");
+
+        quickSaveB.setAction(quickSaveAction);
+        quickSaveB.setMaximumSize(new Dimension(24, 24));
+        quickSaveB.setMinimumSize(new Dimension(24, 24));
+        quickSaveB.setPreferredSize(new Dimension(24, 24));
+        quickSaveB.setRequestFocusEnabled(false);
+        quickSaveB.setToolTipText(Local.getString("Quicksave note to sidebar."));
+        quickSaveB.setBorderPainted(false);
+        quickSaveB.setFocusable(false);
+        quickSaveB.setText("");
 
 		redoB.setAction(editor.redoAction);
 		redoB.setMaximumSize(new Dimension(24, 24));
@@ -331,6 +352,7 @@ public class EditorPanel extends JPanel {
 		editorToolBar.add(exportB, null);
 		editorToolBar.addSeparator(new Dimension(8, 24));
 		editorToolBar.add(previewB, null);
+		editorToolBar.add(quickSaveB, null);
 		// editorToolBar.add(printB, null);
 		jPanel1.add(editorToolBar, BorderLayout.NORTH);
 		jPanel1.add(editor, BorderLayout.CENTER);
@@ -491,6 +513,10 @@ public class EditorPanel extends JPanel {
 		File f = chooser.getSelectedFile();
 		new HTMLFileExport(f, editor.document, CurrentNote.get(), enc,
 				dlg.numentChB.isSelected(), template, dlg.xhtmlChB.isSelected());
+	}
+	
+	public void quickSaveB_actionPerformed(ActionEvent e) {
+        CurrentNote.set(CurrentNote.get(), true);
 	}
 
 	String initialTitle = "";
