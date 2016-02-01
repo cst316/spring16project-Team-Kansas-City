@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -399,8 +400,15 @@ public class TaskDialog extends JDialog {
 	}
 	
     void okB_actionPerformed(ActionEvent e) {
-	CANCELLED = false;
-        this.dispose();
+        if (this.todoField.getText().length() == 0) {
+            String toDoTitle = JOptionPane.showInputDialog("Please input a title for this Task.");
+            if (toDoTitle != null) {
+                this.todoField.setText(toDoTitle);
+            }
+        } else {
+            CANCELLED = false;
+            this.dispose();
+        }
     }
 
     void cancelB_actionPerformed(ActionEvent e) {
