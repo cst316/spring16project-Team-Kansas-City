@@ -25,6 +25,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
@@ -475,11 +476,19 @@ public class EventDialog extends JDialog implements WindowListener {
     }
 
     void okB_actionPerformed(ActionEvent e) {
-        this.dispose();
+        System.out.println(this.textField.getText());
+        if (this.textField.getText().length() == 0) {
+            String eventTitle = JOptionPane.showInputDialog("Please input a title for this Event.");
+            if (eventTitle != null) {
+                this.textField.setText(eventTitle);
+            }
+        } else {
+            CANCELLED = false;
+            this.dispose();
+        }
     }
 
     void cancelB_actionPerformed(ActionEvent e) {
-        CANCELLED = true;
         this.dispose();
     }
 
