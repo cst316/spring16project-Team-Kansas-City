@@ -291,6 +291,8 @@ public class PreferencesDialog extends JDialog {
 		gbc.gridy = 4;
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
+		lfGroup.add(lfSystemRB);
+		lfSystemRB.setText(Local.getString("Modern"));
 
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
@@ -298,6 +300,8 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(lfSystemRB, gbc);
+		lfGroup.add(lfJavaRB);
+		lfJavaRB.setText(Local.getString("Classic"));
 
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
