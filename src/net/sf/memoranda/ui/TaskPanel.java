@@ -117,7 +117,6 @@ public class TaskPanel extends JPanel {
         
         subTaskB.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new_sub.png")));
-        subTaskB.setEnabled(true);
         subTaskB.setMaximumSize(new Dimension(24, 24));
         subTaskB.setMinimumSize(new Dimension(24, 24));
         subTaskB.setToolTipText(Local.getString("Add subtask"));
@@ -243,6 +242,7 @@ public class TaskPanel extends JPanel {
     ppEditTask.setEnabled(false);
     ppEditTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_edit.png")));
     taskPPMenu.setFont(new java.awt.Font("Dialog", 1, 10));
+   
     ppRemoveTask.setFont(new java.awt.Font("Dialog", 1, 11));
     ppRemoveTask.setText(Local.getString("Remove task"));
     ppRemoveTask.addActionListener(new java.awt.event.ActionListener() {
@@ -269,6 +269,8 @@ public class TaskPanel extends JPanel {
             }
         });
     ppAddSubTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new_sub.png")));
+    ppAddSubTask.setEnabled(false);
+    
 
     /*
     ppSubTasks.setFont(new java.awt.Font("Dialog", 1, 11));
@@ -355,7 +357,8 @@ public class TaskPanel extends JPanel {
                 boolean enbl = (taskTable.getRowCount() > 0)&&(taskTable.getSelectedRow() > -1);
                 editTaskB.setEnabled(enbl);ppEditTask.setEnabled(enbl);
                 removeTaskB.setEnabled(enbl);ppRemoveTask.setEnabled(enbl);
-				
+				subTaskB.setEnabled(enbl);
+                
 				ppCompleteTask.setEnabled(enbl);
 				completeTaskB.setEnabled(enbl);
 				ppAddSubTask.setEnabled(enbl);
@@ -388,6 +391,7 @@ public class TaskPanel extends JPanel {
         editTaskB.setEnabled(false);
         removeTaskB.setEnabled(false);
 		completeTaskB.setEnabled(false);
+		subTaskB.setEnabled(false);
 		ppAddSubTask.setEnabled(false);
 		//ppSubTasks.setEnabled(false);
 		//ppParentTask.setEnabled(false);
