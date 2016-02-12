@@ -109,6 +109,9 @@ public class NotesList extends JList {
     }
 
     public Note getNote(int index){
+        if (index < 0) {
+            return null;
+        }
         return (Note) notes.get(index);
     }
     
