@@ -242,9 +242,14 @@ public class NotesControlPanel extends JPanel {
     }
 
     void setActiveNote() {
-        Note note = (Note) notesList.getNote(notesList.getSelectedIndex());
-        CurrentDate.set(note.getDate());
-		CurrentNote.set(note,true);
+        try {
+            Note note = (Note) notesList.getNote(notesList.getSelectedIndex());
+            CurrentDate.set(note.getDate());
+    		CurrentNote.set(note,true);
+        }
+		catch (Exception e){
+		}
+		
     }
    
 
