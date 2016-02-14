@@ -39,6 +39,9 @@ import net.sf.memoranda.util.HTMLFileImport;
 import net.sf.memoranda.util.Local;
 import net.sf.memoranda.util.Configuration;
 
+import java.awt.Desktop;
+import java.net.URI;
+
 /*$Id: EditorPanel.java,v 1.21 2006/06/28 22:58:31 alexeya Exp $*/
 public class EditorPanel extends JPanel {
 	BorderLayout borderLayout1 = new BorderLayout();
@@ -604,13 +607,22 @@ public class EditorPanel extends JPanel {
 
 	void previewB_actionPerformed(ActionEvent e) {
 		File f;
+		
+		//corrected language to attempt to open the file using default web browser
+		//instead of having user select the web browser to open it in.
 		try {
 			f = Util.getTempFile();
+			if(Desktop.isDesktopSupported()){
+				Desktop.getDesktop().browse(f.toURI());
+			}
 			new HTMLFileExport(f, editor.document, CurrentNote.get(), "UTF-8",
 					false, null, false);
 			Util.runBrowser("file:" + f.getAbsolutePath());
 		} catch (IOException ioe) {
 			new ExceptionDialog(ioe, "Cannot create temporary file", null);
+		} catch (Exception ex){
+			ex.printStackTrace();
+			new ExceptionDialog(ex, "Desktop not supported.", null);
 		}
 	}
 }
