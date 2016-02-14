@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import net.sf.memoranda.date.CalendarDate;
 
-public class CalendarDateTest {
+public class CalenderDateTest {
 	
 	private CalendarDate cd1;
 	private CalendarDate cd2;
