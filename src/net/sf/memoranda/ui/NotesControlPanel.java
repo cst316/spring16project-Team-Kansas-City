@@ -222,7 +222,7 @@ public class NotesControlPanel extends JPanel {
     class PopupListener extends MouseAdapter {
 
         public void mouseClicked(MouseEvent e) {
-            if (e.getClickCount() == 2)
+            if (e.getClickCount() == 1)
                 setActiveNote();
         }
 
