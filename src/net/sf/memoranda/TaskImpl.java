@@ -365,28 +365,28 @@ public class TaskImpl implements Task, Comparable {
         return v;
     }
 	
-	/* 
-	 * @see net.sf.memoranda.Task#getSubTask(java.lang.String)
-	 */
-	public Task getSubTask(String id) {
-		Elements subTasks = _element.getChildElements("task");
-		for (int i = 0; i < subTasks.size(); i++) {
-			if (subTasks.get(i).getAttribute("id").getValue().equals(id))
-				return new TaskImpl(subTasks.get(i), _tl);
-		}
-		return null;
-	}
-
-	/* 
-	 * @see net.sf.memoranda.Task#hasSubTasks()
-	 */
-	public boolean hasSubTasks(String id) {
-		Elements subTasks = _element.getChildElements("task");
-		for (int i = 0; i < subTasks.size(); i++) 
-			if (subTasks.get(i).getAttribute("id").getValue().equals(id))
-				return true;
-		return false;
-	}
+//	/* 
+//	 * @see net.sf.memoranda.Task#getSubTask(java.lang.String)
+//	 */
+//	public Task getSubTask(String id) {
+//		Elements subTasks = _element.getChildElements("task");
+//		for (int i = 0; i < subTasks.size(); i++) {
+//			if (subTasks.get(i).getAttribute("id").getValue().equals(id))
+//				return new TaskImpl(subTasks.get(i), _tl);
+//		}
+//		return null;
+//	}
+//
+//	/* 
+//	 * @see net.sf.memoranda.Task#hasSubTasks()
+//	 */
+//	public boolean hasSubTasks(String id) {
+//		Elements subTasks = _element.getChildElements("task");
+//		for (int i = 0; i < subTasks.size(); i++) 
+//			if (subTasks.get(i).getAttribute("id").getValue().equals(id))
+//				return true;
+//		return false;
+//	}
 
 	
 }

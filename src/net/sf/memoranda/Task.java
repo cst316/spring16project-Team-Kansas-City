@@ -68,9 +68,10 @@ public interface Task {
     void removeDependsFrom(Task task);*/
             
     Collection getSubTasks();    
-    Task getSubTask(String id);
+    //Task getSubTask(String id);
     
-    boolean hasSubTasks(String id);
+    //SpeculativeGenerality
+    //boolean hasSubTasks(String id);
     
     void setEffort(long effort);
     long getEffort();
