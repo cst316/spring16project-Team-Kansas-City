@@ -8,43 +8,45 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import net.sf.memoranda.*;
 import net.sf.memoranda.date.CalendarDate;
-import net.sf.memoranda.NoteImpl;
+import net.sf.memoranda.ui.TaskTable;
 import nu.xom.Attribute;
+import nu.xom.Document;
 import nu.xom.Element;
 
 public class NoteTest {
 	
+	private CalendarDate date = new CalendarDate(1,1,2016);
+	private NoteListImple noteList;
 	private NoteImpl note1;
 	private NoteImpl note2;
 	private NoteImpl note3;
-	private Project proj;
 	private Element el;
-	private Project proj2;
-	private Element el2;
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
+	@Before
+	public void setUpOnce() throws Exception {
+		ProjectManager.createProject("test", new CalendarDate(1,1,2016), new CalendarDate(31,12,2016));
+		Project test = ProjectManager.getProject("test");
+		noteList = new NoteListImpl(test);
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		note1 = new NoteImpl(el, proj);
-		note2 = new NoteImpl(el2, proj2);
-		note3 = new NoteImpl(el, proj);
+		note1 = new NoteImpl(el, test);
+	}
+	
+	@Test
+	public void testGetProject() throws Exception {
+		assertTrue(noteList.getProject().equals(test));
+	}
+	
+	@Test
+	public void testGetDate() throws Excpetion {
+		assertTrue(date.equals(note1.getDate()));
 	}
 
 	@After
-	public void tearDown() throws Exception {
-	}
-
-	@Test
-	public void equalsTest() {
-		assertTrue(note1.equals(note3));
-		assertFalse(note1.equals(note2)); 
+	public void tearDown() throws Exception { 
 	}
 }
