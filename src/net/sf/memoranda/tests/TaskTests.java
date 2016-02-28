@@ -26,7 +26,7 @@ public class TaskTests {
 	private Vector test2Vector;
 
 	@Before
-	public void setUpOnce() throws Exception {
+	public void setUp() throws Exception {
 		ProjectManager.createProject("test", new CalendarDate(1,1,2016), new CalendarDate(31,12,2016));
 		Project test = ProjectManager.getProject("test");
 		testList = new TaskListImpl(new Document(new Element("document")), test);
