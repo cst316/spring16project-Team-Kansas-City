@@ -18,11 +18,12 @@ import nu.xom.Element;
 public class NoteTest {
 	
 	private CalendarDate date = new CalendarDate(1,1,2016);
-	private NoteListImple noteList;
+	private NoteListImpl noteList;
 	private NoteImpl note1;
 	private NoteImpl note2;
 	private NoteImpl note3;
 	private Element el;
+	Project test;
 
 	@Before
 	public void setUpOnce() throws Exception {
@@ -38,11 +39,11 @@ public class NoteTest {
 	
 	@Test
 	public void testGetProject() throws Exception {
-		assertTrue(noteList.getProject().equals(test));
+		assertTrue(((Note)noteList).getProject().equals(test));
 	}
 	
 	@Test
-	public void testGetDate() throws Excpetion {
+	public void testGetDate() throws Exception {
 		assertTrue(date.equals(note1.getDate()));
 	}
 
