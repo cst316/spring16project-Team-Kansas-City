@@ -54,6 +54,10 @@ public class History {
         if (_list.size() > 99)
             _list.remove(0);     
     }
+    
+    public static Vector getList() {
+        return _list;
+    }
 
     public static HistoryItem rollBack() {        
         Object n = prev;        
