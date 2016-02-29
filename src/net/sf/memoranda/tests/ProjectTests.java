@@ -26,6 +26,7 @@ public class ProjectTests {
 
 	@Test
 	public void testProjects() {
+		
 		assertTrue(ProjectManager.getActiveProjects().size() == 3);
 		
 		assertTrue(ProjectManager.getAllProjects().size() == 5);

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import antlr.collections.impl.Vector;
+
 import net.sf.memoranda.*;
 import net.sf.memoranda.date.CalendarDate;
 
