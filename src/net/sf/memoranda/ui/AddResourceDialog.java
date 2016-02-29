@@ -240,45 +240,6 @@ public class AddResourceDialog extends JDialog {
 	 
     void browseB_actionPerformed(ActionEvent e) {
         // Fix until Sun's JVM supports more locales...
-        UIManager.put("FileChooser.lookInLabelText", 
-            Local.getString("Look in:"));
-        UIManager.put("FileChooser.upFolderToolTipText", 
-            Local.getString("Up One Level"));
-        UIManager.put("FileChooser.newFolderToolTipText", 
-            Local.getString("Create New Folder"));
-        UIManager.put("FileChooser.listViewButtonToolTipText", 
-            Local.getString("List"));
-        UIManager.put("FileChooser.detailsViewButtonToolTipText", 
-            Local.getString("Details"));
-        UIManager.put("FileChooser.fileNameLabelText", 
-            Local.getString("File Name:"));
-        UIManager.put("FileChooser.filesOfTypeLabelText", 
-            Local.getString("Files of Type:"));
-        UIManager.put("FileChooser.openButtonText", 
-            Local.getString("Open"));
-        UIManager.put("FileChooser.openButtonToolTipText", 
-            Local.getString("Open selected file"));
-        UIManager.put("FileChooser.cancelButtonText", 
-            Local.getString("Cancel"));
-        UIManager.put("FileChooser.cancelButtonToolTipText", 
-            Local.getString("Cancel"));
-        
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileHidingEnabled(false);
-        chooser.setDialogTitle(Local.getString("Add resource"));
-        chooser.setAcceptAllFileFilterUsed(true);
-        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);        
-        chooser.setPreferredSize(new Dimension(550, 375));
-        /*java.io.File lastSel = (java.io.File) Context.get("LAST_SELECTED_RESOURCE_FILE");
-        if (lastSel != null)
-            chooser.setCurrentDirectory(lastSel);*/
-        if (chooser.showOpenDialog(this) != JFileChooser.APPROVE_OPTION)
-            return;
-        /*try {
-            Context.put("LAST_SELECTED_RESOURCE_FILE", chooser.getSelectedFile());
-        }
-        catch (Exception ex) {}*/
-        pathField.setText(chooser.getSelectedFile().getPath());
         checkOkEnabled();
     }
 
