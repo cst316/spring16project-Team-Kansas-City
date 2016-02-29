@@ -96,11 +96,12 @@ public class Util {
     public static void runBrowser(String url) {
         if (!checkBrowser())
             return;
-        String commandLine = MimeTypesList.getAppList().getBrowserExec()+" "+url;
+        String commandLine = "open"+" "+ '"' + url + '"';
         System.out.println("Run: " + commandLine);
         try {
             /*DEBUG*/
-            Runtime.getRuntime().exec(commandLine);
+            Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", commandLine});
+            System.out.println(Runtime.getRuntime());
         }
         catch (Exception ex) {
             new ExceptionDialog(ex, "Failed to run an external web-browser application with commandline<br><code>"
